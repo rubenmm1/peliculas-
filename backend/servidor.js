@@ -153,7 +153,7 @@ app.put('/peliculas/:id', (peticion, respuesta) => {
     const peliculas = leerPeliculas();
     
     // Buscar la posición de la canción a actualizar
-    const indice = canciones.findIndex(c => c.id === id);
+    const indice = peliculas.findIndex(c => c.id === id);
     
     if (indice === -1) {
         return respuesta.status(404).json({
@@ -162,8 +162,8 @@ app.put('/peliculas/:id', (peticion, respuesta) => {
         });
     }
     
-    // Actualizar la canción (mantenemos el ID original)
-    canciones[indice] = {
+    // Actualizar la pelicula (mantenemos el ID original)
+    peliculas[indice] = {
         id: id, // Mantener el ID original
         name: name.trim(),
         artista: artista.trim(),

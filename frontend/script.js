@@ -97,14 +97,46 @@ async function crearNuevaPelicula(datosPelicula) {
         }
         
     } catch (error) {
-        console.error('❌ Error al crear canción:', error);
-        mostrarMensaje('Error al guardar la canción', 'error');
+        console.error('❌ Error al crear pelicula:', error);
+        mostrarMensaje('Error al guardar la pelicula', 'error');
     }
 }
 
 
 
-
+function prepararEdicion(id) {
+    console.log(`✏️ Preparando edición de canción ${id}`);
+    
+    // Buscar la canción en la página (una forma simple para este ejercicio)
+    const elementoPelicula = document.querySelector(`[data-id="${id}"]`);
+    if (!elementoPelicula) {
+        mostrarMensaje('No se encontró la canción a editar', 'error');
+        return;
+    }
+    
+    // Extraer datos de la canción del HTML
+    const titulo = elementoPelicula.querySelector('.titulo').textContent;
+    const artista = elementoCancion.querySelector('.artista').textContent.replace('🎤 ', '');
+    const añoTexto = elementoCancion.querySelector('.año').textContent;
+    const año = añoTexto.replace('📅 Año: ', '');
+    
+    // Llenar el formulario con estos datos
+    campoTitulo.value = titulo;
+    campoArtista.value = artista;
+    campoAño.value = año;
+    
+    // Cambiar a modo edición
+    peliculaQueEstamosEditando = id;
+    botonGuardar.textContent = '💾 Actualizar Pelicula';
+    botonCancelar.classList.remove('oculto'); // Mostrar botón cancelar
+    
+    // Hacer scroll suave hacia el formulario
+    document.querySelector('.formulario-seccion').scrollIntoView({ 
+        behavior: 'smooth' 
+    });
+    
+    mostrarMensaje('Editando canción. Modifica los campos y haz clic en "Actualizar"', 'info');
+}
 
 
 async function actualizarPeliculaExistente(id, datosPelicula) {
@@ -151,9 +183,21 @@ async function cargarMechas() {
           const card = document.createElement('div');
           card.className = 'mecha-card';
           card.innerHTML = `
-            <h3>${pelicula.name}</h3>
-            <p><strong>Artista:</strong> ${pelicula.artista}</p>
-            <p><strong>Año:</strong> ${pelicula.ano}</p>
+            <div>
+                <div>
+                    <h3>${pelicula.name}</h3>
+                    <p><strong>Artista:</strong> ${pelicula.artista}</p>
+                    <p><strong>Año:</strong> ${pelicula.ano}</p>
+                </div>
+                <div class="pelicula-acciones">
+                    <button class="btn-editar" onclick="prepararEdicion(${pelicula.id})">
+                        ✏️ Editar
+                    </button>
+                    <button class="btn-eliminar" onclick="preguntarSiEliminar(${pelicula.id}, '${pelicula.titulo}')">
+                        🗑️ Eliminar
+                    </button>
+                </div>
+            <div>
           `;
           contenedor.appendChild(card);
         });
