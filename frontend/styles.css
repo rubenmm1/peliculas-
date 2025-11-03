@@ -168,3 +168,32 @@ button {
     visibility: hidden;
     opacity: 0;
 }
+
+
+
+.cancion-acciones {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-editar {
+    background: #28a745;
+    color: white;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
+
+.btn-editar:hover {
+    background: #218838;
+}
+
+.btn-eliminar {
+    background: #dc3545;
+    color: white;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
+
+.btn-eliminar:hover {
+    background: #c82333;
+}
