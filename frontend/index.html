@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Listado de peliculas</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div id="mensaje" class="mensaje oculto"></div>
+
+  <section class="formulario-seccion">
+            <!-- Título del formulario (cambia cuando editamos) -->
+            <h2 id="titulo-formulario">➕ Agregar Nueva Pelicula</h2>
+            
+            <!-- 
+            EL FORMULARIO: Los campos donde el usuario escribe
+            ================================================
+            Cuando el usuario hace clic en "Guardar", se ejecuta el JavaScript
+            -->
+            <form id="formulario-pelicula">
+                
+                <!-- CAMPO: TÍTULO DE LA PELICULA -->
+                <div class="campo">
+                    <label for="titulo">Título de la pelicula:</label>
+                    <input 
+                        type="text" 
+                        id="titulo" 
+                        name="titulo" 
+                        required 
+                        placeholder="Ejemplo: La Llorona"
+                        maxlength="100">
+                </div>
+
+                <!-- CAMPO: ARTISTA -->
+                <div class="campo">
+                    <label for="artista">Artista:</label>
+                    <input 
+                        type="text" 
+                        id="artista" 
+                        name="artista" 
+                        required 
+                        placeholder="Ejemplo: Manu Chao"
+                        maxlength="100">
+                </div>
+
+                <!-- CAMPO: AÑO -->
+                <div class="campo">
+                    <label for="año">Año de lanzamiento:</label>
+                    <input 
+                        type="number" 
+                        id="año" 
+                        name="año" 
+                        required 
+                        min="1900" 
+                        max="2030" 
+                        placeholder="Ejemplo: 2001">
+                </div>
+
+                <!-- 
+                BOTONES DEL FORMULARIO
+                =====================
+                -->
+                <div class="botones-formulario">
+                    <!-- Botón principal: Guardar o Actualizar -->
+                    <button type="submit" id="btn-guardar">💾 Guardar pelicula</button>
+                    
+                    <!-- Botón cancelar: Solo aparece cuando editamos (inicialmente oculto) -->
+                    <button type="button" id="btn-cancelar" class="oculto">❌ Cancelar</button>
+                </div>
+            </form>
+        </section>
+
+
+
+
+  <h1>Listado de Peliculas</h1>
+  <div class="mecha-list" id="mechaList"></div>
+ 
+  <script src="script.js"></script>
+</body>
+</html>

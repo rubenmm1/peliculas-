@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "La sociedad de la nieve",
+    "artista": "Enzo Vogroncic",
+    "ano": 2022
+  },
+  {
+    "id": 2,
+    "name": "El Titanic",
+    "artista": "Leonardo Dicaprio",
+    "ano": 1998
+  },
+  {
+    "id": 3,
+    "name": "Interestellar",
+    "artista": "Matthew McConaughey",
+    "ano": 2014
+  },
+  {
+    "id": 4,
+    "name": "prueba",
+    "artista": "prueba",
+    "ano": 2000
+  }
+]
