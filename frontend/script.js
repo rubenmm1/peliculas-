@@ -54,6 +54,13 @@ formulario.addEventListener('submit', async (evento) => {
 });
 
 
+botonCancelar.addEventListener('click', () => {
+    console.log('❌ Usuario canceló la edición');
+    limpiarFormulario();
+    mostrarMensaje('Edición cancelada', 'info');
+});
+
+
 function mostrarMensaje(texto, tipo = 'info') {
     console.log(`💬 Mostrando mensaje: ${texto}`);
     
@@ -90,7 +97,7 @@ async function crearNuevaPelicula(datosPelicula) {
         
         if (datos.exito) {
             mostrarMensaje(datos.mensaje, 'exito');
-            limpiarFormulario();
+            //limpiarFormulario();
             cargarMechas(); // Actualizar la lista
         } else {
             mostrarMensaje(datos.mensaje, 'error');
@@ -105,25 +112,26 @@ async function crearNuevaPelicula(datosPelicula) {
 
 
 function prepararEdicion(id) {
-    console.log(`✏️ Preparando edición de canción ${id}`);
+    console.log(`✏️ Preparando edición de pelicula ${id}`);
     
     // Buscar la canción en la página (una forma simple para este ejercicio)
     const elementoPelicula = document.querySelector(`[data-id="${id}"]`);
+    console.log(elementoPelicula);
     if (!elementoPelicula) {
-        mostrarMensaje('No se encontró la canción a editar', 'error');
+        mostrarMensaje('No se encontró la pelicula a editar', 'error');
         return;
     }
     
     // Extraer datos de la canción del HTML
     const titulo = elementoPelicula.querySelector('.titulo').textContent;
-    const artista = elementoCancion.querySelector('.artista').textContent.replace('🎤 ', '');
-    const añoTexto = elementoCancion.querySelector('.año').textContent;
-    const año = añoTexto.replace('📅 Año: ', '');
+    const artista = elementoPelicula.querySelector('.artista').textContent.replace('🎤 ', '');
+    const anoTexto = elementoPelicula.querySelector('.año').textContent;
+    const ano = anoTexto.replace('📅 Año: ', '');
     
     // Llenar el formulario con estos datos
     campoTitulo.value = titulo;
     campoArtista.value = artista;
-    campoAño.value = año;
+    campoAno.value = ano;
     
     // Cambiar a modo edición
     peliculaQueEstamosEditando = id;
@@ -183,11 +191,11 @@ async function cargarMechas() {
           const card = document.createElement('div');
           card.className = 'mecha-card';
           card.innerHTML = `
-            <div>
+            <div data-id="${pelicula.id}">
                 <div>
-                    <h3>${pelicula.name}</h3>
-                    <p><strong>Artista:</strong> ${pelicula.artista}</p>
-                    <p><strong>Año:</strong> ${pelicula.ano}</p>
+                    <h3 class="titulo">${pelicula.name}</h3>
+                    <p class="artista">${pelicula.artista}</p>
+                    <p class="año">${pelicula.ano}</p>
                 </div>
                 <div class="pelicula-acciones">
                     <button class="btn-editar" onclick="prepararEdicion(${pelicula.id})">

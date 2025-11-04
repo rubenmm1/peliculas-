@@ -9,7 +9,7 @@
     "id": 2,
     "name": "El Titanic",
     "artista": "Leonardo Dicaprio",
-    "ano": 1998
+    "ano": 1999
   },
   {
     "id": 3,
@@ -22,5 +22,11 @@
     "name": "prueba",
     "artista": "prueba",
     "ano": 2000
+  },
+  {
+    "id": 5,
+    "name": "pp",
+    "artista": "pp",
+    "ano": 1998
   }
 ]

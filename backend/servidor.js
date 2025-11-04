@@ -139,17 +139,17 @@ app.put('/peliculas/:id', (peticion, respuesta) => {
     console.log(`✏️ Solicitud: Actualizar pelicula con ID ${id}`);
     console.log('📦 Nuevos datos:', peticion.body);
     
-    const { name, artista, año } = peticion.body;
+    const { name, artista, ano } = peticion.body;
     
     // Validar datos
-    if (!name || !artista || !año) {
+    if (!name || !artista || !ano) {
         return respuesta.status(400).json({
             exito: false,
             mensaje: 'Faltan datos. Se necesita: titulo, artista y año'
         });
     }
     
-    // Leer canciones actuales
+    // Leer peliculas actuales
     const peliculas = leerPeliculas();
     
     // Buscar la posición de la canción a actualizar
@@ -167,7 +167,7 @@ app.put('/peliculas/:id', (peticion, respuesta) => {
         id: id, // Mantener el ID original
         name: name.trim(),
         artista: artista.trim(),
-        ano: parseInt(año)
+        ano: parseInt(ano)
     };
     
     // Guardar los cambios
@@ -176,6 +176,46 @@ app.put('/peliculas/:id', (peticion, respuesta) => {
             exito: true,
             datos: peliculas[indice],
             mensaje: `Pelicula "${Peliculas[indice].name}" actualizada exitosamente`
+        });
+    } else {
+        respuesta.status(500).json({
+            exito: false,
+            mensaje: 'Error al guardar los cambios'
+        });
+    }
+});
+
+
+
+app.delete('/peliculas/:id', (peticion, respuesta) => {
+    const id = parseInt(peticion.params.id);
+    console.log(`🗑️ Solicitud: Eliminar canción con ID ${id}`);
+    
+    // Leer canciones actuales
+    const peliculas = leerPeliculas();
+    
+    // Buscar la posición de la canción a eliminar
+    const indice = peliculas.findIndex(c => c.id === id);
+    
+    if (indice === -1) {
+        return respuesta.status(404).json({
+            exito: false,
+            mensaje: `No se encontró una canción con ID ${id}`
+        });
+    }
+    
+    // Guardar referencia a la canción que vamos a eliminar
+    const peliculaEliminada = peliculas[indice];
+    
+    // Eliminar la canción del array
+    canciones.splice(indice, 1);
+    
+    // Guardar los cambios
+    if (guardarPeliculas(peliculas)) {
+        respuesta.json({
+            exito: true,
+            datos: peliculaEliminada,
+            mensaje: `Pelicula "${peliculaEliminada.name}" eliminada exitosamente`
         });
     } else {
         respuesta.status(500).json({
