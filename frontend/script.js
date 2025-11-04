@@ -19,6 +19,14 @@ const botonCancelar = document.getElementById('btn-cancelar');
 const mensajes = document.getElementById('mensaje');
 
 
+
+// Modal de confirmación (ventana para confirmar eliminar)
+const modalConfirmar = document.getElementById('modal-confirmar');
+const mensajeConfirmacion = document.getElementById('mensaje-confirmacion');
+const botonConfirmarEliminar = document.getElementById('btn-confirmar-eliminar');
+const botonCancelarEliminar = document.getElementById('btn-cancelar-eliminar');
+
+
 formulario.addEventListener('submit', async (evento) => {
     // Prevenir que la página se recargue (comportamiento por defecto del formulario)
     evento.preventDefault();
@@ -52,6 +60,50 @@ formulario.addEventListener('submit', async (evento) => {
         await crearNuevaPelicula(datosPelicula);
     }
 });
+
+
+function preguntarSiEliminar(id, titulo) {
+    console.log(`🗑️ Preguntando si eliminar pelicula: ${titulo}`);
+    
+    // Cambiar el mensaje del modal
+    mensajeConfirmacion.textContent = `¿Estás seguro de que quieres eliminar "${titulo}"?`;
+    
+    // Mostrar el modal
+    modalConfirmar.classList.remove('oculto');
+    
+    // Configurar qué pasa cuando el usuario confirma
+    botonConfirmarEliminar.onclick = () => {
+        eliminarPelicula(id);
+        modalConfirmar.classList.add('oculto'); // Cerrar modal
+    };
+}
+
+
+async function eliminarPelicula(id) {
+    try {
+        console.log(`📡 Eliminando pelicula ${id}`);
+        
+        // FETCH con método DELETE: Significa "borrar algo"
+        const respuesta = await fetch(`${URL_API}/${id}`, {
+            method: 'DELETE'
+        });
+        
+        const datos = await respuesta.json();
+        console.log('📦 Respuesta del servidor:', datos);
+        
+        if (datos.exito) {
+            mostrarMensaje(datos.mensaje, 'exito');
+            cargarMechas(); // Actualizar la lista
+        } else {
+            mostrarMensaje(datos.mensaje, 'error');
+        }
+        
+    } catch (error) {
+        console.error('❌ Error al eliminar pelicula:', error);
+        mostrarMensaje('Error al eliminar la pelicula', 'error');
+    }
+}
+
 
 
 botonCancelar.addEventListener('click', () => {
@@ -201,7 +253,7 @@ async function cargarMechas() {
                     <button class="btn-editar" onclick="prepararEdicion(${pelicula.id})">
                         ✏️ Editar
                     </button>
-                    <button class="btn-eliminar" onclick="preguntarSiEliminar(${pelicula.id}, '${pelicula.titulo}')">
+                    <button class="btn-eliminar" onclick="preguntarSiEliminar(${pelicula.id}, '${pelicula.name}')">
                         🗑️ Eliminar
                     </button>
                 </div>

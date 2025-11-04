@@ -189,7 +189,7 @@ app.put('/peliculas/:id', (peticion, respuesta) => {
 
 app.delete('/peliculas/:id', (peticion, respuesta) => {
     const id = parseInt(peticion.params.id);
-    console.log(`🗑️ Solicitud: Eliminar canción con ID ${id}`);
+    console.log(`🗑️ Solicitud: Eliminar pelicula con ID ${id}`);
     
     // Leer canciones actuales
     const peliculas = leerPeliculas();
@@ -208,7 +208,7 @@ app.delete('/peliculas/:id', (peticion, respuesta) => {
     const peliculaEliminada = peliculas[indice];
     
     // Eliminar la canción del array
-    canciones.splice(indice, 1);
+    peliculas.splice(indice, 1);
     
     // Guardar los cambios
     if (guardarPeliculas(peliculas)) {
