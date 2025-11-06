@@ -197,3 +197,71 @@ button {
 .btn-eliminar:hover {
     background: #c82333;
 }
+
+
+
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Asegurar que el modal esté oculto por defecto */
+#modal-confirmar.oculto {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+.modal-contenido {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.modal-contenido h3 {
+    color: #dc3545;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.modal-contenido p {
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.botones-modal {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.btn-peligro {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-peligro:hover {
+    background: #c82333;
+}
+
+.btn-secundario {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-secundario:hover {
+    background: #5a6268;
+}

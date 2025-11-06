@@ -77,6 +77,22 @@
 
   <h1>Listado de Peliculas</h1>
   <div class="mecha-list" id="mechaList"></div>
+
+
+  <div id="modal-confirmar" class="modal oculto">
+        <div class="modal-contenido">
+            <h3>⚠️ Confirmar Eliminación</h3>
+            <!-- El mensaje específico se pone con JavaScript -->
+            <p id="mensaje-confirmacion">¿Estás seguro de que quieres eliminar esta pelicula?</p>
+            
+            <div class="botones-modal">
+                <!-- Botón peligroso: Sí, eliminar -->
+                <button id="btn-confirmar-eliminar" class="btn-peligro">🗑️ Sí, Eliminar</button>
+                <!-- Botón seguro: No, cancelar -->
+                <button id="btn-cancelar-eliminar" class="btn-secundario">❌ Cancelar</button>
+            </div>
+        </div>
+    </div>
  
   <script src="script.js"></script>
 </body>
